@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var numberOfPeople = 2
     @State private var tip = 15
     @FocusState private var amountFocus: Bool
+    @State private var redText = false
     let tipSelector = [10, 15, 20, 0]
     var totalPerPerson: Double {
         let peopleNumPlusTwo = Double(numberOfPeople + 2)
@@ -43,9 +44,12 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                
                 Section("Original Amount + Tip"){
                     Text(amountPlusTip , format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        .foregroundStyle(tip == 0 ? .red : .black)
                 }
+                
                 Section("Total per person:") {
                     Text(totalPerPerson , format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
